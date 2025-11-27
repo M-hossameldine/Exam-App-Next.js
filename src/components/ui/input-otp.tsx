@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { OTPInput, OTPInputContext } from "input-otp";
+import { OTPInput, OTPInputContext, REGEXP_ONLY_DIGITS } from "input-otp";
 import { Dot } from "lucide-react";
 
 import { cn } from "@/lib/utils/tailwind-merge";
@@ -41,8 +41,8 @@ const InputOTPSlot = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "relative flex h-10 w-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md",
-        isActive && "z-10 ring-2 ring-ring ring-offset-background",
+        "relative flex h-10 w-10 items-center justify-center border border-input transition-all",
+        isActive && "z-10 text-primary border-primary",
         className
       )}
       {...props}
@@ -68,4 +68,32 @@ const InputOTPSeparator = React.forwardRef<
 ));
 InputOTPSeparator.displayName = "InputOTPSeparator";
 
-export { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator };
+type AppInputOTPProps = Omit<
+  React.ComponentPropsWithoutRef<typeof InputOTP>,
+  "render" | "maxLength" | "children"
+>;
+
+const AppInputOTP = React.forwardRef<
+  React.ElementRef<typeof InputOTP>,
+  AppInputOTPProps
+>((props, ref) => (
+  <InputOTP {...props} ref={ref} maxLength={6} pattern={REGEXP_ONLY_DIGITS}>
+    <InputOTPGroup className="gap-4">
+      <InputOTPSlot index={0} />
+      <InputOTPSlot index={1} />
+      <InputOTPSlot index={2} />
+      <InputOTPSlot index={3} />
+      <InputOTPSlot index={4} />
+      <InputOTPSlot index={5} />
+    </InputOTPGroup>
+  </InputOTP>
+));
+AppInputOTP.displayName = "AppInputOTP";
+
+export {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+  InputOTPSeparator,
+  AppInputOTP,
+};
