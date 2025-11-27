@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { CheckIcon, ChevronsUpDown } from "lucide-react";
 import * as RPNInput from "react-phone-number-input";
@@ -21,7 +23,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils/tailwind-merge";
 
-type PhoneInputProps = Omit<
+type InputPhoneProps = Omit<
   React.ComponentProps<"input">,
   "onChange" | "value" | "ref"
 > &
@@ -29,13 +31,16 @@ type PhoneInputProps = Omit<
     onChange?: (value: RPNInput.Value) => void;
   };
 
-const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps> =
-  React.forwardRef<React.ElementRef<typeof RPNInput.default>, PhoneInputProps>(
+const InputPhone: React.ForwardRefExoticComponent<InputPhoneProps> =
+  React.forwardRef<React.ElementRef<typeof RPNInput.default>, InputPhoneProps>(
     ({ className, onChange, value, ...props }, ref) => {
       return (
         <RPNInput.default
           ref={ref}
-          className={cn("flex", className)}
+          className={cn(
+            "flex border border-border focus-within:border-primary",
+            className
+          )}
           flagComponent={FlagComponent}
           countrySelectComponent={CountrySelect}
           inputComponent={InputComponent}
@@ -56,16 +61,17 @@ const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps> =
       );
     }
   );
-PhoneInput.displayName = "PhoneInput";
+InputPhone.displayName = "InputPhone";
 
 const InputComponent = React.forwardRef<
   HTMLInputElement,
   React.ComponentProps<"input">
 >(({ className, ...props }, ref) => (
   <Input
-    className={cn("rounded-e-lg rounded-s-none", className)}
+    className={cn("border-0 pl-1", className)}
     {...props}
     ref={ref}
+    placeholder="123456789"
   />
 ));
 InputComponent.displayName = "InputComponent";
@@ -95,25 +101,31 @@ const CountrySelect = ({
       modal
       onOpenChange={(open) => {
         setIsOpen(open);
-        open && setSearchValue("");
+        if (open) {
+          setSearchValue("");
+        }
       }}
     >
       <PopoverTrigger asChild>
         <Button
           type="button"
           variant="outline"
-          className="flex gap-1 rounded-e-none rounded-s-lg border-r-0 px-3 focus:z-10"
+          className="flex gap-1 border-border bg-transparent hover:bg-transparent border-0 px-3 focus:z-10"
           disabled={disabled}
         >
           <FlagComponent
             country={selectedCountry}
             countryName={selectedCountry}
           />
+
+          {selectedCountry && (
+            <span className="text-sm">{`${selectedCountry} (+${RPNInput.getCountryCallingCode(
+              selectedCountry as RPNInput.Country
+            )})`}</span>
+          )}
+
           <ChevronsUpDown
-            className={cn(
-              "-mr-2 size-4 opacity-50",
-              disabled ? "hidden" : "opacity-100"
-            )}
+            className={cn("-mr-2 size-4", disabled ? "hidden" : "opacity-100")}
           />
         </Button>
       </PopoverTrigger>
@@ -199,10 +211,10 @@ const FlagComponent = ({ country, countryName }: RPNInput.FlagProps) => {
   const Flag = flags[country];
 
   return (
-    <span className="flex h-4 w-6 overflow-hidden rounded-sm bg-foreground/20 [&_svg:not([class*='size-'])]:size-full">
+    <span className="flex h-4 w-6 overflow-hidden bg-foreground/20 [&_svg:not([class*='size-'])]:size-full">
       {Flag && <Flag title={countryName} />}
     </span>
   );
 };
 
-export { PhoneInput };
+export { InputPhone };
