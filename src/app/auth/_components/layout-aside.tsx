@@ -17,19 +17,11 @@ export default function LayoutAside({ className }: LayoutAsideProps) {
   return (
     <aside
       className={cn(
-        "relative flex justify-center items-center bg-gray-100 p-4",
+        "relative flex justify-center items-center bg-gray-100 overflow-hidden before:content-[''] before:absolute before:top-[10vh] before:right-[-4rem] before:w-[25rem] before:h-[25rem] before:rounded-full before:bg-primary-400 before:z-10 after:content-[''] after:absolute after:bottom-[-6rem] after:left-4 after:w-[25rem] after:h-[25rem] after:rounded-full after:bg-primary-400 after:z-10",
         className
       )}
     >
-      <div
-        className="absolute top-0 left-0 w-full h-full overflow-y-hidden"
-        aria-hidden="true"
-      >
-        <span className="absolute top-[10vh] -right-16 w-[25rem] h-[25rem] rounded-full bg-primary-400" />
-        <span className="absolute -bottom-24 left-4  w-[25rem] h-[25rem] rounded-full bg-primary-400 block" />
-      </div>
-
-      <div className="absolute top-0 left-0 flex justify-center w-full min-h-full px-32 py-28 backdrop-blur-3xl bg-background/60">
+      <div className="z-20 flex justify-center w-full min-h-full px-32 py-28 backdrop-blur-3xl bg-background/60">
         <div className="flex flex-col max-w-md w-full">
           <p className="flex items-start gap-1 text-xl font-semibold mb-10 text-primary">
             <span className="relative mt-1" aria-hidden="true">
