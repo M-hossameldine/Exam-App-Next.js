@@ -1,3 +1,5 @@
+import LayoutAside from "./_components/layout-aside";
+
 export default function AuthLayout({
   children,
 }: {
@@ -5,9 +7,7 @@ export default function AuthLayout({
 }) {
   return (
     <div className="flex h-screen w-screen ">
-      <aside className="flex justify-center items-center bg-gray-100 p-4 w-full">
-        <h2>Auth</h2>
-      </aside>
+      <LayoutAside className="w-full" />
       <main className="flex justify-center items-center p-4 w-full">
         {children}
       </main>
