@@ -1,7 +1,9 @@
+import ForgotPasswordForm from "./_components/forgot-password-from";
+
 export default function page() {
   return (
     <div>
-      <h1>Forgot Password</h1>
+      <ForgotPasswordForm />
     </div>
   );
 }

@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 
 import { CircleX } from "lucide-react";
 
-type FormFooterProps = {
-  submitButtonText: string;
+export type FormFooterProps = {
+  submitButtonText: React.ReactNode;
   altActionDescription: string;
   altActionText: string;
   altActionHref: string;
@@ -35,7 +35,8 @@ export default function FormFooter({
       <Button className="w-full" variant="default">
         {submitButtonText}
       </Button>
-      <p className="text-sm font-medium text-gray-500">
+
+      <p className="text-sm font-medium text-secondary-500">
         {altActionDescription}{" "}
         <Link href={altActionHref} className="text-primary">
           {altActionText}
