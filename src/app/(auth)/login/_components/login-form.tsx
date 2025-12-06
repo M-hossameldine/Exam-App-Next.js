@@ -8,7 +8,7 @@ import Link from "next/link";
 import InputContainer from "@/components/ui/input-container";
 import { Input } from "@/components/ui/input";
 import { InputPassword } from "@/components/ui/input-password";
-import FormFooter from "@/app/auth/_components/form-footer";
+import FormFooter from "@/app/(auth)/_components/form-footer";
 
 export default function LoginForm() {
   // Navigation
