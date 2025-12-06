@@ -10,7 +10,7 @@ export default function page() {
         submitButtonText="Create Account"
         altActionDescription="Already have an account?"
         altActionText="Login"
-        altActionHref="/auth/login"
+        altActionHref="/login"
         error=""
       />
     </form>

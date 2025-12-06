@@ -46,7 +46,7 @@ export default function StepWrapper({
         submitButtonText={submitButtonText}
         altActionDescription="Don’t have an account?"
         altActionText="Create yours"
-        altActionHref="/auth/signup"
+        altActionHref="/signup"
         error={error}
       />
     </form>

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
 import Link from "next/link";
@@ -11,9 +10,6 @@ import { InputPassword } from "@/components/ui/input-password";
 import FormFooter from "@/app/(auth)/_components/form-footer";
 
 export default function LoginForm() {
-  // Navigation
-  const router = useRouter();
-
   // States
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -42,7 +38,12 @@ export default function LoginForm() {
         return;
       }
 
-      router.push("/home");
+      // * used location.search instead of useSearchParams to avoid unnecessary re-renders, since the search params are not manipulated
+      const callbackUrl =
+        new URLSearchParams(location.search).get("callbackUrl") || "/home";
+
+      // * used window.location.href instead of router.push to fully refresh the page and make sure the user data is updated correctly
+      window.location.href = callbackUrl;
     } finally {
     }
   };
@@ -70,7 +71,7 @@ export default function LoginForm() {
 
           <Link
             className="text-sm font-medium text-primary ms-auto"
-            href="/auth/forgot-password"
+            href="/forgot-password"
           >
             Forgot your password?
           </Link>
@@ -81,7 +82,7 @@ export default function LoginForm() {
         submitButtonText="Login"
         altActionDescription="Don't have an account?"
         altActionText="Create yours"
-        altActionHref="/auth/signup"
+        altActionHref="/signup"
         error={footerError}
       />
     </form>
