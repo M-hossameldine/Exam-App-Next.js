@@ -41,11 +41,13 @@ export default function LayoutAside({ className }: LayoutAsideProps) {
               description="Choose from specialized tracks like Frontend, Backend, and Mobile Development."
               icon={Brain}
             />
+
             <LearningObjective
               title="Focused Exams"
               description="Access topic-specific tests including HTML, CSS, JavaScript, and more."
               icon={BookOpenCheck}
             />
+
             <LearningObjective
               title="Smart Multi-Step Forms"
               description="Choose from specialized tracks like Frontend, Backend, and Mobile Development."
