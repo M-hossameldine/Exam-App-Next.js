@@ -1,10 +1,22 @@
+declare type SuccessResponse<T> = {
+  message: 'success';
+} & T;
+
 declare type ErrorResponse = {
   message: string;
   code: number;
 };
 
-declare type SuccessResponse<T> = {
-  message: string;
-} & T;
-
 declare type ApiResponse<T> = ErrorResponse | SuccessResponse<T>;
+
+declare type PaginationMetadata = {
+  currentPage: number;
+  numberOfPages: number;
+  limit: number;
+};
+
+declare type PaginatedData<Item, Key extends string> = {
+  metadata: PaginationMetadata;
+} & {
+  [K in Key]: Item[];
+};
