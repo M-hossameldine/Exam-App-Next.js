@@ -21,7 +21,10 @@ export default function PageHeader({
   return (
     <header className={cn('flex gap-2.5 items-stretch h-20', className)}>
       {goBackUrl && (
-        <Link href={goBackUrl} className="text-primary border border-primary ">
+        <Link
+          href={goBackUrl}
+          className="flex items-center justify-center w-9 text-primary border border-primary"
+        >
           <ChevronLeft size={24} />
         </Link>
       )}

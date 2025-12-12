@@ -6,7 +6,12 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import DiplomaCard from './diploma-card';
 
 export default function DiplomasList() {
-  const { data: diplomas, fetchNextPage, hasNextPage } = useDiplomas();
+  const {
+    data: diplomas,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useDiplomas();
 
   return (
     <ul id="scrollableDiv" className="h-[calc(100vh-150px)] overflow-y-auto">
@@ -22,6 +27,10 @@ export default function DiplomasList() {
             <DiplomaCard key={diploma._id} diploma={diploma} />
           ))}
         </ul>
+
+        {!hasNextPage && !isFetchingNextPage && (
+          <p className="text-secondary-600 mt-2.5 mx-auto">End of list</p>
+        )}
       </InfiniteScroll>
     </ul>
   );

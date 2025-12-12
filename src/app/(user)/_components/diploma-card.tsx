@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Image from 'next/image';
 import { Diploma } from '@/lib/types/diplomas';
 
@@ -7,7 +8,10 @@ type DiplomaItemProps = {
 
 export default function DiplomaItem({ diploma }: DiplomaItemProps) {
   return (
-    <div className="relative w-full h-[28rem]">
+    <Link
+      href={`/diplomas/${diploma._id}`}
+      className="relative w-full h-[28rem]"
+    >
       <Image
         src={diploma.icon}
         alt={diploma.name}
@@ -24,6 +28,6 @@ export default function DiplomaItem({ diploma }: DiplomaItemProps) {
           {diploma.name}
         </h3>
       </div>
-    </div>
+    </Link>
   );
 }
