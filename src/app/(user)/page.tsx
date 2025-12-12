@@ -1,31 +1,12 @@
-import {
-  HydrationBoundary,
-  QueryClient,
-  dehydrate,
-} from '@tanstack/react-query';
-
-import { getDiplomas } from '@/lib/apis/diplomas';
-
+import PageWrapper from './_components/page-wrapper';
 import DiplomasList from './_components/diplomas-list';
 
+import { BookOpenCheck } from 'lucide-react';
+
 export default async function Page() {
-  const queryClient = new QueryClient();
-
-  // Server-side prefetch
-  await queryClient.prefetchQuery({
-    queryKey: ['posts'],
-    queryFn: getDiplomas,
-  });
-
-  const dehydratedState = dehydrate(queryClient);
-
   return (
-    <HydrationBoundary state={dehydratedState}>
-      <div>
-        {/* TODO: add header */}
-
-        <DiplomasList />
-      </div>
-    </HydrationBoundary>
+    <PageWrapper title="Diplomas" icon={BookOpenCheck}>
+      <DiplomasList />
+    </PageWrapper>
   );
 }

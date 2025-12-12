@@ -1,7 +1,9 @@
 import { DiplomasResponse, DiplomasSuccessResponse } from '../types/diplomas';
 
-export const getDiplomas = async (): Promise<DiplomasSuccessResponse> => {
-  const response = await fetch(`/api/diplomas`, {});
+export const getDiplomas = async (
+  page: number
+): Promise<DiplomasSuccessResponse> => {
+  const response = await fetch(`/api/diplomas?page=${page}&limit=3`, {});
 
   if (!response.ok) {
     throw new Error('Failed to fetch posts');

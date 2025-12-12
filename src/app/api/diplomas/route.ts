@@ -7,7 +7,12 @@ const BASE_URL = `${API}/subjects`;
 export async function GET(request: NextRequest) {
   const token = await getToken({ req: request });
 
-  const response = await fetch(`${BASE_URL}`, {
+  // Extract search params from the incoming request
+  const { searchParams } = request.nextUrl;
+  const page = searchParams.get('page') ?? '1';
+  const limit = searchParams.get('limit') ?? '10';
+
+  const response = await fetch(`${BASE_URL}?page=${page}&limit=${limit}`, {
     method: 'GET',
     headers: {
       token: token?.accessToken ?? '',

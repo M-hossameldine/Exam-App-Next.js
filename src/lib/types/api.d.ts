@@ -13,6 +13,8 @@ declare type PaginationMetadata = {
   currentPage: number;
   numberOfPages: number;
   limit: number;
+  nextPage?: number;
+  prevPage?: number;
 };
 
 declare type PaginatedData<Item, Key extends string> = {
