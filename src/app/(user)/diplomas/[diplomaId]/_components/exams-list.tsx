@@ -13,6 +13,7 @@ export default function ExamsList() {
     data: exams,
     fetchNextPage,
     hasNextPage,
+    isLoading,
     isFetchingNextPage,
   } = useExams();
 
@@ -30,7 +31,7 @@ export default function ExamsList() {
             <ExamCard key={exam._id} exam={exam} diplomaId={diplomaId} />
           ))}
 
-          {!hasNextPage && !isFetchingNextPage && (
+          {!(hasNextPage || isFetchingNextPage || isLoading) && (
             <p className="text-secondary-600 mt-2.5 mx-auto">End of list</p>
           )}
         </ul>

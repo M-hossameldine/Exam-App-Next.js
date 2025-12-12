@@ -10,6 +10,7 @@ export default function DiplomasList() {
     data: diplomas,
     fetchNextPage,
     hasNextPage,
+    isLoading,
     isFetchingNextPage,
   } = useDiplomas();
 
@@ -28,8 +29,10 @@ export default function DiplomasList() {
           ))}
         </ul>
 
-        {!hasNextPage && !isFetchingNextPage && (
-          <p className="text-secondary-600 mt-2.5 mx-auto">End of list</p>
+        {!(hasNextPage || isFetchingNextPage || isLoading) && (
+          <p className="text-secondary-600 mt-6 mx-auto text-center">
+            End of list
+          </p>
         )}
       </InfiniteScroll>
     </ul>
