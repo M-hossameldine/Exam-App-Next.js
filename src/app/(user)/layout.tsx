@@ -6,10 +6,10 @@ type AuthorizedLayoutProps = {
 
 export default function AuthorizedLayout({ children }: AuthorizedLayoutProps) {
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen w-full">
       <LayoutSidebar />
 
-      <main className="w-full">{children}</main>
+      {children}
     </div>
   );
 }
