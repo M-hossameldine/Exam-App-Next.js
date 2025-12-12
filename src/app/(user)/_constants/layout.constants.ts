@@ -7,10 +7,12 @@ export const LAYOUT_SIDEBAR_ITEMS = [
     title: 'Diplomas',
     url: DEFAULT_AUTHORIZED_ROUTE,
     icon: GraduationCap,
+    matchRegex: /^(\/$|.*\/diplomas\/.*)/,
   },
   {
     title: 'Account Settings',
     url: '/settings/profile',
     icon: UserRound,
+    matchRegex: /settings/,
   },
 ];

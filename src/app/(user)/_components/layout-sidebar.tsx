@@ -44,7 +44,7 @@ export default function LayoutSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {LAYOUT_SIDEBAR_ITEMS.map(item => {
-                const isSelected = pathname === item.url;
+                const isSelected = item.matchRegex?.test(pathname);
 
                 return (
                   <SidebarMenuItem key={item.title}>
