@@ -10,7 +10,7 @@ export default function LayoutSidebarFooter() {
 
   return (
     <div className="flex items-center gap-2">
-      <Avatar>
+      <Avatar className="w-12 h-12 border border-primary">
         <AvatarImage src="https://github.com/shadcn.png" />
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
@@ -19,7 +19,9 @@ export default function LayoutSidebarFooter() {
         <p className="font-medium text-primary-600">
           {session?.user?.firstName}
         </p>
-        <p className="text-secondary-500">{session?.user?.email}</p>
+        <p className="max-w-[12.5rem] truncate text-ellipsis text-secondary-500 ">
+          {session?.user?.email}
+        </p>
       </div>
 
       <LayoutSidebarDropdown />
