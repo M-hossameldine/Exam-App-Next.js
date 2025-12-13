@@ -19,7 +19,7 @@ export default function PageHeader({
   className,
 }: PageHeaderProps) {
   return (
-    <header className={cn('flex gap-2.5 items-stretch h-20', className)}>
+    <header className={cn('flex gap-2.5 items-stretch h-20 m-6', className)}>
       {goBackUrl && (
         <Link
           href={goBackUrl}

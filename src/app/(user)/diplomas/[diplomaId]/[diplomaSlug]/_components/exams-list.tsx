@@ -6,8 +6,13 @@ import { useParams } from 'next/navigation';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import ExamCard from './exam-card';
 
+type ExamsListParams = {
+  diplomaId: string;
+  diplomaSlug: string;
+};
+
 export default function ExamsList() {
-  const { diplomaId } = useParams<{ diplomaId: string }>();
+  const { diplomaId, diplomaSlug } = useParams<ExamsListParams>();
 
   const {
     data: exams,
@@ -28,7 +33,12 @@ export default function ExamsList() {
       >
         <ul className="flex flex-col gap-4">
           {exams?.map?.(exam => (
-            <ExamCard key={exam._id} exam={exam} diplomaId={diplomaId} />
+            <ExamCard
+              key={exam._id}
+              exam={exam}
+              diplomaId={diplomaId}
+              diplomaSlug={diplomaSlug}
+            />
           ))}
 
           {!(hasNextPage || isFetchingNextPage || isLoading) && (

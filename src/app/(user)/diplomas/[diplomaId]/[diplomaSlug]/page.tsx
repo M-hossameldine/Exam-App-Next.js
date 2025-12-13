@@ -1,4 +1,4 @@
-import PageWrapper from '../../_components/page-wrapper';
+import PageWrapper from '../../../_components/page-wrapper';
 import ExamsList from './_components/exams-list';
 
 import { BookOpenCheck } from 'lucide-react';

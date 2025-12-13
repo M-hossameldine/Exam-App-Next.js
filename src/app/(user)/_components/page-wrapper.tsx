@@ -12,12 +12,7 @@ export default function PageWrapper({
 }: PageWrapperProps) {
   return (
     <main className="h-screen w-full flex flex-col items-stretch bg-secondary-50">
-      <PageHeader
-        title={title}
-        icon={icon}
-        goBackUrl={goBackUrl}
-        className={'m-6'}
-      />
+      <PageHeader title={title} icon={icon} goBackUrl={goBackUrl} />
 
       <div className="px-6 pb-6 w-full">{children}</div>
     </main>

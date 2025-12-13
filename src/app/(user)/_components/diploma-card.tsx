@@ -1,3 +1,5 @@
+import { slugifyTitle } from '@/lib/utils/navigation';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Diploma } from '@/lib/types/diplomas';
@@ -9,7 +11,7 @@ type DiplomaItemProps = {
 export default function DiplomaItem({ diploma }: DiplomaItemProps) {
   return (
     <Link
-      href={`/diplomas/${diploma._id}`}
+      href={`/diplomas/${diploma._id}/${slugifyTitle(diploma.name)}`}
       className="relative w-full h-[28rem]"
     >
       <Image

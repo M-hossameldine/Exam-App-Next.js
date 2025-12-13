@@ -1,3 +1,5 @@
+import { slugifyTitle } from '@/lib/utils/navigation';
+
 import Link from 'next/link';
 import { Exam } from '@/lib/types/exams';
 
@@ -6,12 +8,19 @@ import { Timer } from 'lucide-react';
 type ExamCardProps = {
   exam: Exam;
   diplomaId: string;
+  diplomaSlug: string;
 };
 
-export default function ExamCard({ exam, diplomaId }: ExamCardProps) {
+export default function ExamCard({
+  exam,
+  diplomaId,
+  diplomaSlug,
+}: ExamCardProps) {
   return (
     <Link
-      href={`/diplomas/${diplomaId}/exams/${exam._id}`}
+      href={`/diplomas/${diplomaId}/${diplomaSlug}/exams/${
+        exam._id
+      }/${slugifyTitle(exam.title)}`}
       className="flex justify-between items-center w-full p-4 bg-primary-50"
     >
       <div className="flex flex-col gap-1">
