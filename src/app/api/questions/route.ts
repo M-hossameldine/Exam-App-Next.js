@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAuthorizedApiHeaders } from '@/lib/utils/apis';
+import {
+  getCommonApiHeaders,
+  getRouteHandlerAuthHeader,
+} from '@/lib/utils/apis.utils';
+
 import { API } from '@/lib/constants/api.constants';
 
 const BASE_URL = `${API}/questions`;
@@ -8,11 +12,15 @@ export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl;
   const examId = searchParams.get('examId');
 
-  const headers = await getAuthorizedApiHeaders(request);
+  const headers = await getCommonApiHeaders(request);
+  const authHeader = await getRouteHandlerAuthHeader(request);
 
   const response = await fetch(`${BASE_URL}?exam=${examId}`, {
     method: 'GET',
-    headers,
+    headers: {
+      ...headers,
+      ...authHeader,
+    },
     cache: 'no-store',
   });
 
