@@ -54,12 +54,12 @@ export default function ProfileForm() {
       <div className={cn(backendError ? 'mt-6' : 'mt-8', 'flex gap-4 w-full')}>
         <Button
           variant={'secondary'}
-          className="w-full bg-destructive-50 text-destructive hover:bg-destructive-50"
+          className="w-full bg-destructive-50 text-destructive hover:bg-destructive-100"
         >
           Delete My Account
         </Button>
 
-        <Button className="w-full hover:bg-primary">Save Changes</Button>
+        <Button className="w-full">Save Changes</Button>
       </div>
     </form>
   );

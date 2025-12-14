@@ -53,7 +53,7 @@ export default function LayoutSidebar() {
                         href={item.url}
                         className={cn(
                           isSelected
-                            ? 'border-primary text-primary bg-primary-100'
+                            ? 'border-primary text-primary bg-primary-100 hover:bg-primary-200'
                             : 'border-transparent text-secondary-500',
                           'border'
                         )}

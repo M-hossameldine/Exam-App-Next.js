@@ -38,7 +38,7 @@ export default function SettingsSidebar() {
                         href={item.url}
                         className={cn(
                           isSelected
-                            ? 'text-primary bg-primary-100'
+                            ? 'text-primary bg-primary-100 hover:bg-primary-200'
                             : 'text-secondary-500',
                           'border-none'
                         )}
@@ -66,7 +66,7 @@ export default function SettingsSidebar() {
                 <SidebarMenuButton
                   size={'sm'}
                   className={cn(
-                    'border-none text-destructive-500 bg-destructive-50'
+                    'border-none text-destructive-500 bg-destructive-50 hover:bg-destructive-100'
                   )}
                 >
                   <LogIn className="size-6" size={24} width={24} height={24} />
