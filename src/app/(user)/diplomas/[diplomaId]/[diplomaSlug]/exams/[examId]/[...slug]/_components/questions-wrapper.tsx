@@ -91,7 +91,7 @@ export default function QuestionsWrapper() {
       icon={CircleQuestionMark}
       goBackUrl={`/diplomas/${diplomaId}/${diplomaSlug}`}
     >
-      <div className="p-6 bg-white h-[calc(100vh-150px)] overflow-auto flex flex-col">
+      <div className="p-6 bg-white h-[calc(100vh-202px)] overflow-auto flex flex-col">
         <ExamProgress
           title={`${deslugifyTitle(diplomaSlug)} - ${deslugifyTitle(slug)}`}
           totalQuestions={questions?.questions?.length || 0}

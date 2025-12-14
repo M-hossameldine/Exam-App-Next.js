@@ -23,7 +23,7 @@ export default function ExamsList() {
   } = useExams();
 
   return (
-    <ul id="scrollableDiv" className="h-[calc(100vh-150px)] overflow-y-auto">
+    <ul id="scrollableDiv" className="h-[calc(100vh-202px)] overflow-y-auto">
       <InfiniteScroll
         dataLength={exams?.length || 0}
         next={fetchNextPage}
