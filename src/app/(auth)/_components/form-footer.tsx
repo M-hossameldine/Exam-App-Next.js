@@ -1,9 +1,8 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-
-import { CircleX } from "lucide-react";
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { ErrorBox } from '@/components/ui/error-box';
 
 export type FormFooterProps = {
   submitButtonText: React.ReactNode;
@@ -22,22 +21,14 @@ export default function FormFooter({
 }: FormFooterProps) {
   return (
     <div className="flex flex-col items-center gap-9 mt-10 w-full">
-      {error && (
-        <p className="relative flex justify-center items-center h-10 w-full border border-destructive bg-destructive-50 text-sm font-regular text-destructive">
-          {error}
-
-          <span className="absolute left-[50%] top-0 -translate-x-1/2 -translate-y-1/2 text-destructive bg-white rounded-full">
-            <CircleX className="" strokeWidth={1.5} size={18} />
-          </span>
-        </p>
-      )}
+      {error && <ErrorBox error={error} />}
 
       <Button className="w-full" variant="default">
         {submitButtonText}
       </Button>
 
       <p className="text-sm font-medium text-secondary-500">
-        {altActionDescription}{" "}
+        {altActionDescription}{' '}
         <Link href={altActionHref} className="text-primary">
           {altActionText}
         </Link>
