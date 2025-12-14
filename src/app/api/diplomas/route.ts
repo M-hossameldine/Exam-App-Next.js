@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import {
-  getCommonApiHeaders,
-  getRouteHandlerAuthHeader,
-} from '@/lib/utils/apis.utils';
+import { getApiBaseHeaders, getApiAuthHeader } from '@/lib/utils/apis.utils';
 import { API } from '@/lib/constants/api.constants';
 
 const BASE_URL = `${API}/subjects`;
@@ -13,8 +10,8 @@ export async function GET(request: NextRequest) {
   const page = searchParams.get('page') ?? '1';
   const limit = searchParams.get('limit') ?? '10';
 
-  const headers = await getCommonApiHeaders(request);
-  const authHeader = await getRouteHandlerAuthHeader(request);
+  const headers = await getApiBaseHeaders();
+  const authHeader = await getApiAuthHeader(request);
 
   const response = await fetch(`${BASE_URL}?page=${page}&limit=${limit}`, {
     method: 'GET',

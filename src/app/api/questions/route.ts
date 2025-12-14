@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import {
-  getCommonApiHeaders,
-  getRouteHandlerAuthHeader,
-} from '@/lib/utils/apis.utils';
+import { getApiBaseHeaders, getApiAuthHeader } from '@/lib/utils/apis.utils';
 
 import { API } from '@/lib/constants/api.constants';
 
@@ -12,8 +9,8 @@ export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl;
   const examId = searchParams.get('examId');
 
-  const headers = await getCommonApiHeaders(request);
-  const authHeader = await getRouteHandlerAuthHeader(request);
+  const headers = await getApiBaseHeaders();
+  const authHeader = await getApiAuthHeader(request);
 
   const response = await fetch(`${BASE_URL}?exam=${examId}`, {
     method: 'GET',
