@@ -15,7 +15,10 @@ export default function DiplomasList() {
   } = useDiplomas();
 
   return (
-    <ul id="scrollableDiv" className="h-[calc(100vh-202px)] overflow-y-auto">
+    <ul
+      id="scrollableDiv"
+      className="h-[calc(100vh-12.625rem)] overflow-y-auto"
+    >
       <InfiniteScroll
         dataLength={diplomas?.length || 0}
         next={fetchNextPage}

@@ -16,10 +16,12 @@ export default function SettingsLayout({ children }: SettingsLayoutProps) {
       icon={UserRound}
       goBackUrl={DEFAULT_AUTHORIZED_ROUTE}
     >
-      <div className="flex h-full w-full">
+      <div className="flex gap-6 h-full w-full">
         <SettingsSidebar />
 
-        {children}
+        <div className="h-[calc(100vh-12.625rem)] w-full p-6 bg-white overflow-auto">
+          {children}
+        </div>
       </div>
     </PageWrapper>
   );
