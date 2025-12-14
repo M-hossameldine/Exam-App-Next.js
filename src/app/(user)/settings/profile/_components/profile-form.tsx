@@ -8,6 +8,7 @@ import { InputPassword } from '@/components/ui/input-password';
 import { InputPhone } from '@/components/ui/input-phone';
 import { ErrorBox } from '@/components/ui/error-box';
 import { Button } from '@/components/ui/button';
+import { DeleteAccountAlert } from './delete-account-alert';
 
 export default function ProfileForm() {
   const backendError = 'This is an error';
@@ -52,12 +53,7 @@ export default function ProfileForm() {
 
       {/* Form Actions  */}
       <div className={cn(backendError ? 'mt-6' : 'mt-8', 'flex gap-4 w-full')}>
-        <Button
-          variant={'secondary'}
-          className="w-full bg-destructive-50 text-destructive hover:bg-destructive-100"
-        >
-          Delete My Account
-        </Button>
+        <DeleteAccountAlert />
 
         <Button className="w-full">Save Changes</Button>
       </div>
