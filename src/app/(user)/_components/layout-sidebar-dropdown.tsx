@@ -1,5 +1,7 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -13,6 +15,8 @@ import {
 import { EllipsisVertical, UserRound, LogOut } from 'lucide-react';
 
 export function LayoutSidebarDropdown() {
+  const router = useRouter();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
@@ -29,7 +33,7 @@ export function LayoutSidebarDropdown() {
 
       <DropdownMenuContent className="w-56" side="right" align="end">
         <DropdownMenuGroup>
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={() => router.push('/settings/profile')}>
             <UserRound className="text-secondary-400" />
             Account
           </DropdownMenuItem>

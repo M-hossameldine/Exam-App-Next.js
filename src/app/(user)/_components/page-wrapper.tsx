@@ -17,7 +17,7 @@ export default function PageWrapper({
 
       <PageHeader title={title} icon={icon} goBackUrl={goBackUrl} />
 
-      <div className="px-6 pb-6 w-full">{children}</div>
+      <div className="px-6 pb-6 w-full h-full">{children}</div>
     </main>
   );
 }
