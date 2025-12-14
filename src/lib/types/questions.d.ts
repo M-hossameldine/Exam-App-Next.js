@@ -14,7 +14,39 @@ export type Question = {
   createdAt: string;
 };
 
-export type QuestionsResponse = ApiResponse<Question, 'questions'>;
-export type QuestionsSuccessResponse = SuccessResponse<
-  PaginatedData<Question, 'questions'>
->;
+export type QuestionsResponsePayload = {
+  questions: Question[];
+  exam: Exam;
+};
+export type QuestionsResponse = ApiResponse<QuestionsResponsePayload>;
+export type QuestionsSuccessResponse =
+  SuccessResponse<QuestionsResponsePayload>;
+
+export type CheckAnswersPayload = {
+  answers: {
+    questionId: string;
+    correct: string;
+  }[];
+  time: number;
+};
+
+export type CheckAnswersResponsePayload = {
+  correct: number;
+  wrong: number;
+  total: string;
+  WrongQuestions: {
+    QID: string;
+    Question: string;
+    inCorrectAnswer: string;
+    correctAnswer: string;
+  }[];
+  correctQuestions: {
+    QID: string;
+    Question: string;
+    correctAnswer: string;
+    inCorrectAnswer: null;
+  }[];
+};
+export type CheckAnswersResponse = ApiResponse<CheckAnswersResponsePayload>;
+export type CheckAnswersSuccessResponse =
+  SuccessResponse<CheckAnswersResponsePayload>;

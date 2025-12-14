@@ -12,7 +12,7 @@ export default function ExamProgress({
   currentQuestion,
 }: ExamProgressProps) {
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex flex-col gap-1.5 mb-10">
       <div className="flex justify-between text-sm text-secondary-500">
         <p className="text-sm text-secondary-500">{title}</p>
 

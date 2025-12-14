@@ -1,6 +1,9 @@
 'use server';
 
-import { CheckAnswersPayload } from '../types/questions';
+import {
+  CheckAnswersPayload,
+  CheckAnswersSuccessResponse,
+} from '../types/questions';
 import { getApiBaseHeaders, getApiAuthHeader } from '../utils/apis.utils';
 
 import { API } from '../constants/api.constants';
@@ -22,5 +25,5 @@ export const checkAnswers = async (payload: CheckAnswersPayload) => {
 
   const result = await response.json();
 
-  return result;
+  return result as CheckAnswersSuccessResponse;
 };
