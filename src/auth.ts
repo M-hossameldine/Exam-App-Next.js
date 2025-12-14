@@ -1,33 +1,33 @@
-import { NextAuthOptions } from "next-auth";
-import Credentials from "next-auth/providers/credentials";
-import { LoginResponse } from "./lib/types/auth";
+import { NextAuthOptions } from 'next-auth';
+import Credentials from 'next-auth/providers/credentials';
+import { LoginResponse } from './lib/types/auth';
 
-export const authOption: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   pages: {
-    signIn: "/login",
+    signIn: '/login',
   },
   providers: [
     Credentials({
-      name: "credentials",
+      name: 'credentials',
       credentials: {
         email: {},
         password: {},
       },
-      authorize: async (credentials) => {
+      authorize: async credentials => {
         const response = await fetch(`${process.env.API}/auth/signin`, {
-          method: "POST",
+          method: 'POST',
           body: JSON.stringify({
             email: credentials?.email,
             password: credentials?.password,
           }),
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
         });
 
         const payload: ApiResponse<LoginResponse> = await response.json();
 
-        if ("code" in payload) {
+        if ('code' in payload) {
           throw new Error(payload.message);
         }
 
@@ -45,9 +45,12 @@ export const authOption: NextAuthOptions = {
       ...token,
       ...(user ? { accessToken: user?.accessToken, user: user.user } : {}),
     }),
-    session: ({ session }) => ({
-      ...session,
-      user: session.user,
-    }),
+    session: ({ session, token }) => {
+      return {
+        ...session,
+        // * don't pass the accessToken to the session as it could be vulnerable on the client side
+        user: token.user,
+      };
+    },
   },
 };
