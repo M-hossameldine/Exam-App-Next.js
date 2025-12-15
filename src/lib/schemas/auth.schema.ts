@@ -57,3 +57,11 @@ export const resetPasswordSchema = z.object({
   newPassword: z.string().nonempty('Your new password is required'),
   confirmedPassword: z.string().nonempty('Your confirmed password is required'),
 });
+
+export const updateProfileSchema = signupSchema.partial();
+
+export const changePasswordSchema = z.object({
+  oldPassword: z.string().nonempty('Your old password is required'),
+  password: z.string().nonempty('Your new password is required'),
+  rePassword: z.string().nonempty('Your confirm password is required'),
+});
