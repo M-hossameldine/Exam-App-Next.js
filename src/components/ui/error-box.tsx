@@ -17,7 +17,7 @@ export function ErrorBox({ error, className }: ErrorBoxProps) {
         className
       )}
     >
-      {error}
+      {error ? error.charAt(0).toUpperCase() + error.slice(1) : ''}
 
       <span className="absolute left-[50%] top-0 -translate-x-1/2 -translate-y-1/2 text-destructive bg-white rounded-full">
         <CircleX className="" strokeWidth={1.5} size={18} />
