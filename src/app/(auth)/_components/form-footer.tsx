@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ErrorBox } from '@/components/ui/error-box';
+import { Spinner } from '@/components/ui/spinner';
 
 export type FormFooterProps = {
   submitButtonText: React.ReactNode;
@@ -10,6 +11,7 @@ export type FormFooterProps = {
   altActionText: string;
   altActionHref: string;
   error?: string;
+  isLoading?: boolean;
 };
 
 export default function FormFooter({
@@ -18,12 +20,14 @@ export default function FormFooter({
   altActionText,
   altActionHref,
   error,
+  isLoading = false,
 }: FormFooterProps) {
   return (
     <div className="flex flex-col items-center gap-9 mt-10 w-full">
       {error && <ErrorBox error={error} />}
 
-      <Button className="w-full" variant="default">
+      <Button className="w-full" variant="default" disabled={isLoading}>
+        {isLoading && <Spinner className="size-4 animate-spin" />}
         {submitButtonText}
       </Button>
 
