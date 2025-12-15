@@ -128,7 +128,7 @@ export default function ExamQuestions({
           Previous
         </Button>
 
-        <ExamTimerRing minutes={examTimeInMinutes} />
+        <ExamTimerRing minutes={examTimeInMinutes} onComplete={submitAnswers} />
 
         <Button
           className="flex-2 grow"
