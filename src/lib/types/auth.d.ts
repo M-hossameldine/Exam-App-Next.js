@@ -3,9 +3,13 @@ import { User } from 'next-auth';
 import z from 'zod';
 import {
   loginSchema,
+  signupSchema,
   sendOtpViaEmailSchema,
   verifyResetCodeSchema,
+  resetPasswordSchema,
 } from '../schemas/auth.schema';
+
+export type AuthMode = 'signin' | 'signup';
 
 // Login
 export type LoginFields = z.infer<typeof loginSchema>;
@@ -14,6 +18,9 @@ export type LoginResponse = {
   token: string;
   user: User['user'];
 };
+
+// signup
+export type SignupFields = z.infer<typeof signupSchema>;
 
 export type SignupResponse = {
   token: string;

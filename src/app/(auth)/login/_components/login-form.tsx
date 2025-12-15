@@ -1,6 +1,6 @@
 'use client';
 
-import { useLogin } from '@/hooks/auth/use-login';
+import { useAuth } from '@/hooks/auth/use-auth';
 
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
@@ -16,8 +16,7 @@ import { loginSchema } from '@/lib/schemas/auth.schema';
 
 export default function LoginForm() {
   // Mutations
-  const { loginMutation, isPending, error: submitError } = useLogin();
-  console.log(submitError?.message);
+  const { mutate: loginMutation, isPending, error: submitError } = useAuth();
 
   // Form
   const form = useForm<LoginFields>({
@@ -30,8 +29,7 @@ export default function LoginForm() {
 
   // Functions
   const onSubmit: SubmitHandler<LoginFields> = async data => {
-    console.log(data);
-    loginMutation(data);
+    loginMutation({ ...data, mode: 'signin' });
   };
 
   return (

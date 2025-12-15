@@ -1,15 +1,18 @@
 import { useMutation } from '@tanstack/react-query';
-import { LoginFields } from '@/lib/types/auth';
+import { LoginFields, SignupFields } from '@/lib/types/auth';
 import { signIn } from 'next-auth/react';
 
 import { DEFAULT_AUTHORIZED_ROUTE } from '@/lib/constants/settings.constants';
 
-export function useLogin() {
+type AuthFields =
+  | (LoginFields & { mode: 'signin' })
+  | (SignupFields & { mode: 'signup' });
+
+export function useAuth() {
   const { isPending, error, mutate } = useMutation({
-    mutationFn: async (fields: LoginFields) => {
+    mutationFn: async (fields: AuthFields) => {
       const response = await signIn('credentials', {
-        email: fields.email,
-        password: fields.password,
+        ...fields,
         redirect: false,
       });
 
@@ -35,6 +38,6 @@ export function useLogin() {
   return {
     isPending,
     error,
-    loginMutation: mutate,
+    mutate,
   };
 }

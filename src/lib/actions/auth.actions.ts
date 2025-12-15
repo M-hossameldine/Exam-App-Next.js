@@ -3,6 +3,8 @@
 import { getApiBaseHeaders } from '../utils/apis.utils';
 
 import {
+  SignupFields,
+  SignupResponse,
   ForgotPasswordFields,
   ForgotPasswordResponse,
   VerifyResetCodeFields,
@@ -11,6 +13,22 @@ import {
 import { API } from '../constants/api.constants';
 
 const BASE_URL = `${API}/auth`;
+
+export const signup = async (payload: SignupFields) => {
+  const commonHeaders = getApiBaseHeaders();
+
+  const response = await fetch(`${BASE_URL}/signup`, {
+    method: 'POST',
+    body: JSON.stringify(payload),
+    headers: {
+      ...commonHeaders,
+    },
+  });
+
+  const result = await response.json();
+
+  return result as SignupResponse;
+};
 
 export const forgotPassword = async (payload: ForgotPasswordFields) => {
   const commonHeaders = getApiBaseHeaders();
