@@ -1,34 +1,38 @@
-import { MoveLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { MoveLeft } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 import FormFooter, {
   type FormFooterProps,
-} from "../../_components/form-footer";
+} from '../../_components/form-footer';
 
 type StepWrapperProps = Omit<
   FormFooterProps,
-  "altActionDescription" | "altActionText" | "altActionHref"
+  'altActionDescription' | 'altActionText' | 'altActionHref'
 > & {
   title: string;
   instruction: React.ReactNode;
   onGoBack?: () => void;
+  onSubmit: () => void;
+  isLoading?: boolean;
   children: React.ReactNode;
 };
 
 export default function StepWrapper({
   title,
   instruction,
+  onSubmit,
+  isLoading,
   onGoBack,
   children,
   submitButtonText,
   error,
 }: StepWrapperProps) {
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       {onGoBack && (
         <Button
-          variant={"outline"}
-          size={"icon"}
+          variant={'outline'}
+          size={'icon'}
           className="bg-transparent hover:bg-secondary-100 mb-10 border border-secondary-200"
           onClick={onGoBack}
         >
@@ -48,6 +52,7 @@ export default function StepWrapper({
         altActionText="Create yours"
         altActionHref="/signup"
         error={error}
+        isLoading={isLoading}
       />
     </form>
   );

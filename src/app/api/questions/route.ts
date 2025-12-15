@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl;
   const examId = searchParams.get('examId');
 
-  const headers = await getApiBaseHeaders();
+  const headers = getApiBaseHeaders();
   const authHeader = await getApiAuthHeader(request);
 
   const response = await fetch(`${BASE_URL}?exam=${examId}`, {

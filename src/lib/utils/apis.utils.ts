@@ -22,7 +22,7 @@ export const getApiAuthHeader = async (request?: NextRequest) => {
   };
 };
 
-export const getApiBaseHeaders = async () => {
+export const getApiBaseHeaders = () => {
   return {
     'Content-Type': 'application/json',
     'Accept-Language': 'ar',

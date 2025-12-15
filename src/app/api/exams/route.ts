@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
   const page = searchParams.get('page') ?? '1';
   const limit = searchParams.get('limit') ?? '10';
 
-  const headers = await getApiBaseHeaders();
+  const headers = getApiBaseHeaders();
   const authHeader = await getApiAuthHeader(request);
 
   const response = await fetch(`${BASE_URL}?page=${page}&limit=${limit}`, {
