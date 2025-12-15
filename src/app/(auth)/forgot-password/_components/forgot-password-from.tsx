@@ -21,12 +21,20 @@ export default function ForgotPasswordForm() {
     setStep('otp');
   };
 
+  const handleSubmitOtp = () => {
+    setStep('new-password');
+  };
+
   return (
     <div>
       {step === 'email' ? (
         <EmailStep onSubmitEmail={handleSubmitEmail} />
       ) : step === 'otp' ? (
-        <OtpStep onGoBack={handleOtpGoBack} email={email} />
+        <OtpStep
+          onGoBack={handleOtpGoBack}
+          email={email}
+          onSubmitOtp={handleSubmitOtp}
+        />
       ) : (
         <NewPasswordStep />
       )}

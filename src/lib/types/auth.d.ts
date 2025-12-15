@@ -1,8 +1,13 @@
-import { forgotPasswordEmailSchema } from './../schemas/auth.schema';
+import { sendOtpViaEmailSchema } from './../schemas/auth.schema';
 import { User } from 'next-auth';
 import z from 'zod';
-import { loginSchema, forgotPasswordEmailSchema } from '../schemas/auth.schema';
+import {
+  loginSchema,
+  sendOtpViaEmailSchema,
+  verifyResetCodeSchema,
+} from '../schemas/auth.schema';
 
+// Login
 export type LoginFields = z.infer<typeof loginSchema>;
 
 export type LoginResponse = {
@@ -10,14 +15,22 @@ export type LoginResponse = {
   user: User['user'];
 };
 
-// forgot password
-export type ForgotPasswordEmailResponse = ApiResponse<{
-  info: string;
-}>;
-export type ForgotPasswordEmailSuccessResponse = SuccessResponse<{
+export type SignupResponse = {
+  token: string;
+  user: User['user'];
+};
+
+// Forgot password - Email Step
+export type ForgotPasswordFields = z.infer<typeof sendOtpViaEmailSchema>;
+
+export type ForgotPasswordResponse = ApiResponse<{
   info: string;
 }>;
 
-export type ForgotPasswordEmailFields = z.infer<
-  typeof forgotPasswordEmailSchema
->;
+// Reset password - Otp Step
+export type VerifyResetCodeFields = z.infer<typeof verifyResetCodeSchema>;
+
+export type VerifyResetCodeResponse = ApiResponse<{ status: 'Success' }>;
+export type VerifyResetCodeSuccessResponse = SuccessResponse<{
+  status: 'Success';
+}>;

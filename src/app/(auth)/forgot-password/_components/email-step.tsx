@@ -1,16 +1,16 @@
 'use client';
 
 import { useForgotPasswordEmail } from '@/hooks/auth/use-forgot-password-email';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import InputContainer from '@/components/ui/input-container';
 import { Input } from '@/components/ui/input';
 import StepWrapper from './step-wrapper';
 
-import { ForgotPasswordEmailFields } from '@/lib/types/auth';
-import { forgotPasswordEmailSchema } from '@/lib/schemas/auth.schema';
+import { ForgotPasswordFields } from '@/lib/types/auth';
+import { sendOtpViaEmailSchema } from '@/lib/schemas/auth.schema';
 
 import { MoveRight } from 'lucide-react';
 
@@ -27,15 +27,15 @@ export default function EmailStep({ onSubmitEmail }: EmailStepProps) {
   } = useForgotPasswordEmail();
 
   // Form
-  const form = useForm<ForgotPasswordEmailFields>({
+  const form = useForm<ForgotPasswordFields>({
     defaultValues: {
       email: '',
     },
-    resolver: zodResolver(forgotPasswordEmailSchema),
+    resolver: zodResolver(sendOtpViaEmailSchema),
   });
 
   // Functions
-  const onSubmit: SubmitHandler<ForgotPasswordEmailFields> = async data => {
+  const onSubmit: SubmitHandler<ForgotPasswordFields> = async data => {
     try {
       await mutateAsync(data);
 
