@@ -11,7 +11,7 @@ import { API } from '../constants/api.constants';
 const BASE_URL = `${API}/questions`;
 
 export const checkAnswers = async (payload: CheckAnswersPayload) => {
-  const commonHeaders = await getApiBaseHeaders();
+  const commonHeaders = getApiBaseHeaders();
   const authHeader = await getApiAuthHeader();
 
   const response = await fetch(`${BASE_URL}/check`, {

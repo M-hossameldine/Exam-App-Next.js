@@ -1,4 +1,9 @@
+'use client';
+import { useDeleteAccount } from '@/hooks/settings/use-delete-account';
+
 import { Button } from '@/components/ui/button';
+import { Spinner } from '@/components/ui/spinner';
+
 import {
   Dialog,
   DialogClose,
@@ -12,10 +17,13 @@ import {
 import { TriangleAlert } from 'lucide-react';
 
 export function DeleteAccountAlert() {
+  const { mutateAsync: deleteAccount, isPending } = useDeleteAccount();
+
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button
+          type="button"
           variant="secondary"
           className="w-full bg-destructive-50 text-destructive hover:bg-destructive-100"
         >
@@ -49,8 +57,12 @@ export function DeleteAccountAlert() {
               </Button>
             </DialogClose>
 
-            <Button className="w-full max-w-56 bg-destructive hover:bg-destructive-hover ">
-              Save changes
+            <Button
+              className="w-full max-w-56 bg-destructive hover:bg-destructive-hover "
+              onClick={() => deleteAccount()}
+            >
+              {isPending && <Spinner className="size-4 animate-spin" />}
+              Yes, delete
             </Button>
           </footer>
         </div>
