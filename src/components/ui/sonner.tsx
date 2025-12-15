@@ -1,26 +1,26 @@
-"use client"
+'use client';
 
 import {
-  CircleCheck,
+  Check,
   Info,
   LoaderCircle,
   OctagonX,
   TriangleAlert,
-} from "lucide-react"
-import { useTheme } from "next-themes"
-import { Toaster as Sonner } from "sonner"
+} from 'lucide-react';
+import { useTheme } from 'next-themes';
+import { Toaster as Sonner } from 'sonner';
 
-type ToasterProps = React.ComponentProps<typeof Sonner>
+type ToasterProps = React.ComponentProps<typeof Sonner>;
 
 const Toaster = ({ ...props }: ToasterProps) => {
-  const { theme = "system" } = useTheme()
+  const { theme = 'system' } = useTheme();
 
   return (
     <Sonner
-      theme={theme as ToasterProps["theme"]}
-      className="toaster group"
+      theme={theme as ToasterProps['theme']}
+      className="toaster group rounded-none"
       icons={{
-        success: <CircleCheck className="h-4 w-4" />,
+        success: <Check className="h-4 w-4 text-success" />,
         info: <Info className="h-4 w-4" />,
         warning: <TriangleAlert className="h-4 w-4" />,
         error: <OctagonX className="h-4 w-4" />,
@@ -29,17 +29,17 @@ const Toaster = ({ ...props }: ToasterProps) => {
       toastOptions={{
         classNames: {
           toast:
-            "group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:border-border group-[.toaster]:shadow-lg",
-          description: "group-[.toast]:text-muted-foreground",
+            'group toast group-[.toaster]:bg-secondary-800 group-[.toaster]:text-white group-[.toaster]:border-none group-[.toaster]:shadow-lg !rounded-none',
+          description: 'group-[.toast]:text-white',
           actionButton:
-            "group-[.toast]:bg-primary group-[.toast]:text-primary-foreground",
+            'group-[.toast]:bg-primary group-[.toast]:text-primary-foreground',
           cancelButton:
-            "group-[.toast]:bg-muted group-[.toast]:text-muted-foreground",
+            'group-[.toast]:bg-muted group-[.toast]:text-muted-foreground',
         },
       }}
       {...props}
     />
-  )
-}
+  );
+};
 
-export { Toaster }
+export { Toaster };
