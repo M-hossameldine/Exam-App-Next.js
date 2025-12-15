@@ -140,7 +140,7 @@ export default function ExamQuestions({
 
             handleNextQuestion();
           }}
-          disabled={isCheckingAnswers}
+          disabled={isCheckingAnswers || !currentAnswer}
         >
           {isCheckingAnswers && <Spinner />}
           {isLastQuestion ? 'Finish' : 'Next'}
