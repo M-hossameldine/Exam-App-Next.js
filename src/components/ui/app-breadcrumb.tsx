@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { cn } from '@/lib/utils/tailwind-merge';
 
 import Link from 'next/link';
@@ -26,10 +27,10 @@ export function AppBreadcrumb({ items }: AppBreadcrumbProps) {
           const isLast = index === items.length - 1;
           const isFirst = index === 0;
           return (
-            <>
+            <React.Fragment key={index}>
               {!isFirst && <BreadcrumbSeparator>/</BreadcrumbSeparator>}
 
-              <BreadcrumbItem key={index}>
+              <BreadcrumbItem>
                 <BreadcrumbLink
                   asChild
                   className={cn(
@@ -41,7 +42,7 @@ export function AppBreadcrumb({ items }: AppBreadcrumbProps) {
                   <Link href={item.href}>{item.label}</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
-            </>
+            </React.Fragment>
           );
         })}
       </BreadcrumbList>

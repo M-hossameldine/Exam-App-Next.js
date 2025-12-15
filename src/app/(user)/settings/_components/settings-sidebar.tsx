@@ -1,6 +1,8 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+
+import { useLogout } from '@/hooks/auth/use-logout';
 import { cn } from '@/lib/utils/tailwind-merge';
 
 import Link from 'next/link';
@@ -17,9 +19,12 @@ import {
 import { SETTINGS_SIDEBAR_ITEMS } from '../_constants/settings.constants';
 
 import { LogIn } from 'lucide-react';
+import { Spinner } from '@/components/ui/spinner';
 
 export default function SettingsSidebar() {
   const pathname = usePathname();
+
+  const { mutate: logout, isPending: logoutLoading } = useLogout();
 
   return (
     <aside className="h-full">
@@ -68,9 +73,16 @@ export default function SettingsSidebar() {
                   className={cn(
                     'border-none text-destructive-500 bg-destructive-50 hover:bg-destructive-100'
                   )}
+                  onClick={async () => {
+                    logout();
+                  }}
+                  disabled={logoutLoading}
                 >
                   <LogIn className="size-6" size={24} width={24} height={24} />
                   <span>Logout</span>
+                  {logoutLoading && (
+                    <Spinner className={cn('size-4 ms-auto')} />
+                  )}
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>

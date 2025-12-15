@@ -2,6 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 
+import { useLogout } from '@/hooks/auth/use-logout';
+
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -16,6 +18,8 @@ import { EllipsisVertical, UserRound, LogOut } from 'lucide-react';
 
 export function LayoutSidebarDropdown() {
   const router = useRouter();
+
+  const { mutate: logout } = useLogout();
 
   return (
     <DropdownMenu>
@@ -40,7 +44,10 @@ export function LayoutSidebarDropdown() {
 
           <DropdownMenuSeparator />
 
-          <DropdownMenuItem className="text-destructive">
+          <DropdownMenuItem
+            className="text-destructive"
+            onClick={() => logout()}
+          >
             <LogOut className="scale-x-[-1]" />
             Logout
           </DropdownMenuItem>
