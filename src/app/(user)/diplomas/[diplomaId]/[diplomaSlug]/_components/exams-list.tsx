@@ -4,6 +4,7 @@ import { useExams } from '@/hooks/exams/use-exams';
 import { useParams } from 'next/navigation';
 
 import InfiniteScroll from 'react-infinite-scroll-component';
+import LazyLoadingIndicator from '../../../../_components/lazy-loading-indicator';
 import ExamCard from './exam-card';
 
 type ExamsListParams = {
@@ -31,10 +32,14 @@ export default function ExamsList() {
         dataLength={exams?.length || 0}
         next={fetchNextPage}
         hasMore={hasNextPage ?? false}
-        loader={<h4>Loading...</h4>}
+        loader={<LazyLoadingIndicator text="Loading Exams..." />}
         scrollableTarget="scrollableDiv"
       >
-        <ul className="flex flex-col gap-4">
+        {isLoading && (
+          <LazyLoadingIndicator text="Loading Exams..." className="mt-[20vh]" />
+        )}
+
+        <ul className="flex flex-col gap-4 w-full">
           {exams?.map?.(exam => (
             <ExamCard
               key={exam._id}

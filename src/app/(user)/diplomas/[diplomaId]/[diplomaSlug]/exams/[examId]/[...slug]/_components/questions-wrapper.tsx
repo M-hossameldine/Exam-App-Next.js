@@ -14,6 +14,7 @@ import ExamQuestions from './exam-questions';
 import ExamResult from './exam-result';
 
 import { CircleQuestionMark } from 'lucide-react';
+import LazyLoadingIndicator from '@/app/(user)/_components/lazy-loading-indicator';
 
 export default function QuestionsWrapper() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -27,7 +28,8 @@ export default function QuestionsWrapper() {
   }>();
 
   // queries & mutations
-  const { data: questions } = useQuestions(examId);
+  const { data: questions, isLoading: isLoadingQuestions } =
+    useQuestions(examId);
   const {
     mutateAsync: checkAnswersMutation,
     data: resultData,
@@ -84,6 +86,12 @@ export default function QuestionsWrapper() {
   const handleCheckAnswersSuccess = () => {
     setIsExamResult(true);
   };
+
+  if (isLoadingQuestions) {
+    return (
+      <LazyLoadingIndicator text="Loading Questions..." className="mt-[20vh]" />
+    );
+  }
 
   return (
     <PageWrapper

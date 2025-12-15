@@ -4,6 +4,7 @@ import { useDiplomas } from '@/hooks/diplomas/use-diplomas';
 
 import InfiniteScroll from 'react-infinite-scroll-component';
 import DiplomaCard from './diploma-card';
+import LazyLoadingIndicator from './lazy-loading-indicator';
 
 export default function DiplomasList() {
   const {
@@ -23,9 +24,16 @@ export default function DiplomasList() {
         dataLength={diplomas?.length || 0}
         next={fetchNextPage}
         hasMore={hasNextPage ?? false}
-        loader={<h4>Loading...</h4>}
+        loader={<LazyLoadingIndicator text="Loading Diplomas..." />}
         scrollableTarget="scrollableDiv"
       >
+        {isLoading && (
+          <LazyLoadingIndicator
+            text="Loading Diplomas..."
+            className="mt-[20vh]"
+          />
+        )}
+
         <ul className="grid grid-cols-3 gap-2.5">
           {diplomas?.map?.(diploma => (
             <DiplomaCard key={diploma._id} diploma={diploma} />
