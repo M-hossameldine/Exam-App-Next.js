@@ -44,7 +44,7 @@ export default function ForgotPasswordForm() {
           start={start}
         />
       ) : (
-        <NewPasswordStep />
+        <NewPasswordStep email={email} />
       )}
     </div>
   );

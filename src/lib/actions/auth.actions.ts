@@ -9,6 +9,8 @@ import {
   ForgotPasswordResponse,
   VerifyResetCodeFields,
   VerifyResetCodeResponse,
+  ResetPasswordFields,
+  ResetPasswordResponse,
 } from '../types/auth';
 import { API } from '../constants/api.constants';
 
@@ -60,4 +62,22 @@ export const verifyResetCode = async (payload: VerifyResetCodeFields) => {
   const result = await response.json();
 
   return result as VerifyResetCodeResponse;
+};
+
+export const resetPassword = async (
+  payload: Omit<ResetPasswordFields, 'confirmedPassword'>
+) => {
+  const commonHeaders = getApiBaseHeaders();
+
+  const response = await fetch(`${BASE_URL}/resetPassword`, {
+    method: 'PUT',
+    body: JSON.stringify(payload),
+    headers: {
+      ...commonHeaders,
+    },
+  });
+
+  const result = await response.json();
+
+  return result as ResetPasswordResponse;
 };

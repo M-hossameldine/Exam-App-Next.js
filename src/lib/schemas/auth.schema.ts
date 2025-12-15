@@ -46,3 +46,14 @@ export const verifyResetCodeSchema = z.object({
     .nonempty('Your OTP is required')
     .length(6, 'OTP must be 6 digits'),
 });
+
+export const resetPasswordSchema = z.object({
+  email: z.email({
+    error: issue =>
+      issue.input === undefined || issue.input === ''
+        ? 'Your email is required'
+        : 'Please enter a valid email address',
+  }),
+  newPassword: z.string().nonempty('Your new password is required'),
+  confirmedPassword: z.string().nonempty('Your confirmed password is required'),
+});

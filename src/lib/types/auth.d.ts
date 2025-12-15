@@ -41,3 +41,11 @@ export type VerifyResetCodeResponse = ApiResponse<{ status: 'Success' }>;
 export type VerifyResetCodeSuccessResponse = SuccessResponse<{
   status: 'Success';
 }>;
+
+// Reset password - New Password Step
+export type ResetPasswordFields = z.infer<typeof resetPasswordSchema>;
+
+export type ResetPasswordResponse = ApiResponse<{ token: string }>;
+export type ResetPasswordSuccessResponse = SuccessResponse<{
+  token: string;
+}>;
