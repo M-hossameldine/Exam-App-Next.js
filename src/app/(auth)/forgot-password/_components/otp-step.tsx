@@ -1,6 +1,7 @@
 'use client';
 
 import { useVerifyResetCode } from '@/hooks/auth/user-verify-reset-code';
+import { useForgotPasswordEmail } from '@/hooks/auth/use-forgot-password-email';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -23,15 +24,22 @@ type OtpStepProps = {
   onGoBack: () => void;
   email: string;
   onSubmitOtp: () => void;
+  canResend: boolean;
+  remainingSeconds: number;
+  start: () => void;
 };
 
 export default function OtpStep({
   onGoBack,
   email,
   onSubmitOtp,
+  canResend,
+  remainingSeconds,
+  start,
 }: OtpStepProps) {
   // Mutations
   const { mutateAsync, isPending, error: submitError } = useVerifyResetCode();
+  const { mutateAsync: resendOtp } = useForgotPasswordEmail();
 
   // Form
   const form = useForm<VerifyResetCodeFields>({
@@ -46,6 +54,13 @@ export default function OtpStep({
     try {
       await mutateAsync(data);
       onSubmitOtp();
+    } catch {}
+  };
+
+  const handleResendOtp = async () => {
+    try {
+      await resendOtp({ email });
+      start();
     } catch {}
   };
 
@@ -92,10 +107,20 @@ export default function OtpStep({
           />
 
           <p className="text-sm font-medium text-secondary-500">
-            Didn’t receive the code?
-            <Button type="button" variant="link" size="sm">
-              Resend
-            </Button>
+            {canResend
+              ? 'Didn’t receive the code?'
+              : `You can request another code in: ${remainingSeconds}s`}
+
+            {canResend && (
+              <Button
+                type="button"
+                variant="link"
+                size="sm"
+                onClick={handleResendOtp}
+              >
+                Resend
+              </Button>
+            )}
           </p>
         </div>
       </StepWrapper>

@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 
+import { useResendOtpTimer } from '../_hooks/use-resend-otp-timer';
+
 import EmailStep from './email-step';
 import OtpStep from './otp-step';
 import NewPasswordStep from './new-password-step';
@@ -10,15 +12,18 @@ export default function ForgotPasswordForm() {
   // States
   const [step, setStep] = useState<'email' | 'otp' | 'new-password'>('email');
   const [email, setEmail] = useState<string>('');
+  const { canResend, remainingSeconds, start, reset } = useResendOtpTimer();
 
   // Functions
   const handleOtpGoBack = () => {
     setStep('email');
+    reset();
   };
 
   const handleSubmitEmail = (email: string) => {
     setEmail(email);
     setStep('otp');
+    start();
   };
 
   const handleSubmitOtp = () => {
@@ -34,6 +39,9 @@ export default function ForgotPasswordForm() {
           onGoBack={handleOtpGoBack}
           email={email}
           onSubmitOtp={handleSubmitOtp}
+          canResend={canResend}
+          remainingSeconds={remainingSeconds}
+          start={start}
         />
       ) : (
         <NewPasswordStep />
